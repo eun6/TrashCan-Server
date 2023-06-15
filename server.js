@@ -64,19 +64,19 @@ app.post('/save', function(요청, 응답){
     
 });
 
-//유저가 작성한 모든 경로에 해당 페이지를 보여주세요.
-//리엑트 라우터가 보여질 것임.
-app.get('*', function(요청, 응답){
-    응답.sendFile(path.join(__dirname, '/trashcan/build/index.html'));
-});
-
 app.post('/trash', function(요청, 응답){
     conn.query('delete from user ORDER BY ID DESC LIMIT 1;', (error) => {
         if (error) throw err;
         응답.json({
             statusCode : 200,
-            responseMessage : "성공적으로 삭제함옴.",
+            responseMessage : "성공적으로 삭제함.",
         });
         console.log("삭제.");
     });
+});
+
+//유저가 작성한 모든 경로에 해당 페이지를 보여주세요.
+//리엑트 라우터가 보여질 것임.
+app.get('*', function(요청, 응답){
+    응답.sendFile(path.join(__dirname, '/trashcan/build/index.html'));
 });
